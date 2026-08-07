@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Resto de la Bodega</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Login screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">🍷</div>
+      <h1>Panel de administración</h1>
+      <p class="login-sub">Resto de la Bodega</p>
+      <form id="login-form">
+        <input type="password" id="admin-password" placeholder="Contraseña" autocomplete="current-password" required>
+        <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+      </form>
+      <p id="login-error" class="login-error hidden">Contraseña incorrecta</p>
+      <a href="index.html" class="back-link">← Volver a la carta</a>
+    </div>
+  </div>
+
+  <!-- Admin panel -->
+  <div id="admin-panel" class="admin-panel hidden">
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <span class="admin-logo">🍷</span>
+        <div>
+          <strong>Admin</strong>
+          <span class="admin-sub">Resto de la Bodega</span>
+        </div>
+      </div>
+      <div class="admin-header-actions">
+        <a href="index.html" class="btn btn-outline btn-sm" target="_blank">Ver carta</a>
+        <button id="logout-btn" class="btn btn-outline btn-sm">Salir</button>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="admin-tabs">
+      <button class="tab active" data-tab="items">Platos</button>
+      <button class="tab" data-tab="settings">Configuración</button>
+    </nav>
+
+    <!-- Tab: Platos -->
+    <section id="tab-items" class="tab-content active">
+      <div class="admin-toolbar">
+        <input type="search" id="search-items" placeholder="Buscar plato..." class="search-input">
+        <select id="filter-group" class="filter-select">
+          <option value="all">Todos los grupos</option>
+          <option value="comidas">Comidas</option>
+          <option value="bebidas">Bebidas</option>
+          <option value="cafeteria">Cafetería</option>
+        </select>
+        <select id="filter-visibility" class="filter-select">
+          <option value="all">Todos</option>
+          <option value="visible">Solo visibles</option>
+          <option value="hidden">Solo ocultos</option>
+        </select>
+      </div>
+
+      <div id="items-list" class="items-list">
+        <!-- Se llena dinámicamente -->
+      </div>
+    </section>
+
+    <!-- Tab: Configuración -->
+    <section id="tab-settings" class="tab-content">
+      <div class="settings-card">
+        <h2>Visibilidad global</h2>
+        
+        <label class="switch-row">
+          <span>
+            <strong>Mostrar precios</strong>
+            <small>Si está apagado, los precios no se ven en la carta</small>
+          </span>
+          <input type="checkbox" id="cfg-show-prices" class="switch">
+        </label>
+
+        <label class="switch-row">
+          <span>
+            <strong>Mostrar carrito / pedidos</strong>
+            <small>Botón flotante para armar pedido por WhatsApp</small>
+          </span>
+          <input type="checkbox" id="cfg-show-cart" class="switch">
+        </label>
+      </div>
+
+      <div class="settings-card">
+        <h2>WhatsApp</h2>
+        <label class="field">
+          <span>Número (código país + número, sin + ni espacios)</span>
+          <input type="text" id="cfg-whatsapp" placeholder="5492994123456" class="text-input">
+        </label>
+        <p class="field-hint">Ejemplo: 5492991234567</p>
+      </div>
+
+      <div class="settings-card danger-zone">
+        <h2>Zona de peligro</h2>
+        <p>Restablece todos los cambios (precios, visibilidad, config) a los valores originales del archivo.</p>
+        <button id="reset-btn" class="btn btn-danger">Restablecer todo</button>
+      </div>
+
+      <div class="settings-actions">
+        <button id="save-settings" class="btn btn-primary btn-full">Guardar configuración</button>
+      </div>
+    </section>
+
+    <!-- Toast -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="menu-data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
